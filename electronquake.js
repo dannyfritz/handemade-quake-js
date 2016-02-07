@@ -8,6 +8,11 @@ const BrowserWindow = electron.BrowserWindow
 const app = electron.app
 let mainWindow = null
 
+const shutdown = () => {
+  mainWindow = null
+  app.quit()
+}
+
 app.on("ready", () => {
   mainWindow = new BrowserWindow({
     title: `Module ${config.version}`,
@@ -17,14 +22,8 @@ app.on("ready", () => {
   mainWindow.setContentSize(800, 600)
   mainWindow.loadURL("file://" + __dirname + "/index.html")
   mainWindow.webContents.openDevTools({detach: true})
-  mainWindow.on("closed", () => {
-    mainWindow = null
-    app.quit()
-  })
-  ipcMain.on("quit", (event, arg) => {
-    mainWindow = null
-    app.quit()
-  })
+  mainWindow.on("closed", shutdown)
+  ipcMain.on("quit", shutdown)
 })
 
 module.exports = app
