@@ -1,5 +1,5 @@
 {
   "name": "handmade-quake",
-  "version": "0.1.0",
-  "main": "main.js"
+  "version": "2.2.0",
+  "main": "quake.js"
 }

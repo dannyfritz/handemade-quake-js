@@ -1,4 +1,7 @@
-"use strict";
-const COM = require("./common")
+"use strict"
 
-require("./electronquake")
+const ipcRenderer = require('electron').ipcRenderer
+
+document.addEventListener('keydown', () => {
+  ipcRenderer.send('quit')
+})
