@@ -6,7 +6,9 @@ const argc = process.argv.length
 
 const COM_CheckParm = (parm) => argv.indexOf(parm)
 
-console.log(COM_CheckParm("-test"))
+const test = COM_CheckParm("-test")
+console.log(test)
+console.log(parseInt(argv[test+1]))
 
 const app = electron.app;
 app.quit();
