@@ -1,7 +1,6 @@
 "use strict"
 
 ;((root) => {
-  let timeStart = 0
   let timePassed = 0
 
   const ms2s = (ms) => ms / 1000
@@ -15,17 +14,18 @@
 
   const floatTime = () => {
     const timeNow = COM.queryPerformanceCounter()
-    timePassed = timeNow - timeStart
+    timePassed = timeNow - SYS.timeStart
     return timePassed
   }
 
   root.SYS = {
+    timeStart: 0,
     initFloatTime,
     floatTime,
   }
 
   root.COM = {
     queryPerformanceCounter,
-    ms2s
+    ms2s,
   }
 })(window)

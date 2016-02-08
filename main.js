@@ -1,8 +1,5 @@
 "use strict"
 
-const electron = require("electron")
-const ipcRenderer = electron.ipcRenderer
-
 HOST.init()
 
 let oldTime = SYS.initFloatTime()

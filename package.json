@@ -2,5 +2,6 @@
   "name": "handmade-quake",
   "version": "0.1.0",
   "module": "2.6",
-  "main": "quake.js"
+  "main": "quake.js",
+  "devDependencies": {}
 }

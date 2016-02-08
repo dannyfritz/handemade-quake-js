@@ -3,7 +3,7 @@
 ;((root) => {
   let realTime = 0
   let oldRealTime = 0
-  let targetFramerate = 1/72
+  const targetFramerate = 1/60 * 1000
 
   const filterTime = (time) => {
     realTime += time
@@ -16,10 +16,11 @@
     return true
   }
 
-  const init = () => {}
+  const init = () => {
+    console.log("HOST.init")
+  }
 
   const frame = (timestep) => {
-    console.log(timestep)
     if (!HOST.filterTime(timestep))
     {
       return
@@ -28,13 +29,15 @@
     // render scene
   }
 
-  const shutdown = () => {}
+  const shutdown = () => {
+    console.log("HOST.shutdown")
+  }
 
   root.HOST = {
     frameTime: 0,
     filterTime,
     init,
     frame,
-    shutdown
+    shutdown,
   }
 })(window)
