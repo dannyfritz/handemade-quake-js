@@ -15,7 +15,7 @@ const shutdown = () => {
 
 app.on("ready", () => {
   mainWindow = new BrowserWindow({
-    title: `Module ${config.version}`,
+    title: `Handmade Quake - Module ${config.module}`,
     resizable: false,
   })
   mainWindow.setMenu(null)
