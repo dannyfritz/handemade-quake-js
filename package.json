@@ -3,5 +3,11 @@
   "version": "0.1.0",
   "module": "2.6",
   "main": "quake.js",
-  "devDependencies": {}
+  "scripts": {
+    "start": "electron . --enable-logging"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "electron-prebuilt": "^0.36.7"
+  }
 }
