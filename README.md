@@ -7,6 +7,10 @@ Please consider donating to [Philip's Patreon](http://bit.ly/1UsXwF5)!
 
 Talk about Handemade Quake [on Reddit](http://bit.ly/1WhdIcW).
 
+## JavaScript Notes
+
+Using Node.js, Chrome, and Electron
+
 ## Running
 
 Install [node.js](https://nodejs.org/en/)
