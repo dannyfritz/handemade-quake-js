@@ -1,2 +1,2 @@
 "use strict"
-require("./electronquake")
+require("./main/electronquake")
