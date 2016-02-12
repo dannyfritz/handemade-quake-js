@@ -15,4 +15,6 @@ const main = () =>
   oldTime = newTime
 }
 
+document.addEventListener("keyup", HOST.shutdown)
+
 main()

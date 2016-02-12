@@ -1,7 +1,7 @@
 {
   "name": "handmade-quake",
   "version": "0.1.0",
-  "module": "2.6",
+  "module": "3.2",
   "main": "quake.js",
   "scripts": {
     "start": "electron . --enable-logging"
