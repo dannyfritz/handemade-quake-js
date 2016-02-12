@@ -7,12 +7,14 @@ const BrowserWindow = electron.BrowserWindow
 const app = electron.app
 let mainWindow = null
 
-const shutdown = () => {
+const shutdown = () =>
+{
   mainWindow = null
   app.quit()
 }
 
-app.on("ready", () => {
+app.on("ready", () =>
+{
   mainWindow = new BrowserWindow({
     title: `Handmade Quake - Module ${config.module}`,
     resizable: false,

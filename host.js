@@ -1,43 +1,46 @@
 "use strict"
 
-;((root) => {
-  let realTime = 0
-  let oldRealTime = 0
-  const targetFramerate = 1/60 * 1000
+let realTime = 0
+let oldRealTime = 0
+let frameTime = 0
+const targetFramerate = 1/60 * 1000
 
-  const filterTime = (time) => {
-    realTime += time
-    if (realTime - oldRealTime < targetFramerate)
-    {
-      return false
-    }
-    HOST.frameTime = realTime - oldRealTime
-    oldRealTime = realTime
-    return true
+const filterTime = (time) =>
+{
+  realTime += time
+  if (realTime - oldRealTime < targetFramerate)
+  {
+    return false
   }
+  frameTime = realTime - oldRealTime
+  oldRealTime = realTime
+  return true
+}
 
-  const init = () => {
-    console.log("HOST.init")
-  }
+const init = () =>
+{
+  console.log("HOST.init")
+}
 
-  const frame = (timestep) => {
-    if (!HOST.filterTime(timestep))
-    {
-      return
-    }
-    // update game
-    // render scene
+const frame = (timestep) =>
+{
+  if (!filterTime(timestep))
+  {
+    return
   }
+  // update game
+  // render scene
+}
 
-  const shutdown = () => {
-    console.log("HOST.shutdown")
-  }
+const shutdown = () =>
+{
+  console.log("HOST.shutdown")
+}
 
-  root.HOST = {
-    frameTime: 0,
-    filterTime,
-    init,
-    frame,
-    shutdown,
-  }
-})(window)
+module.exports = {
+  frameTime,
+  filterTime,
+  init,
+  frame,
+  shutdown,
+}

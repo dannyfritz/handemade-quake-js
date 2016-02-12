@@ -1,9 +1,10 @@
 "use strict"
 
-const com_argv = process.argv
+const ms2s = (ms) => ms / 1000
 
-const CheckParm = (parm) => com_argv.indexOf(parm)
+const queryPerformanceCounter = () => performance.now()
 
 module.exports = {
-  CheckParm,
+  queryPerformanceCounter,
+  ms2s,
 }

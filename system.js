@@ -1,31 +1,24 @@
 "use strict"
+const COM = require("./common")
 
-;((root) => {
-  let timePassed = 0
+let timePassed = 0
+let timeStart = 0
 
-  const ms2s = (ms) => ms / 1000
+const initFloatTime = () =>
+{
+  timeStart = COM.queryPerformanceCounter()
+  return 0
+}
 
-  const queryPerformanceCounter = () => performance.now()
+const floatTime = () =>
+{
+  const timeNow = COM.queryPerformanceCounter()
+  timePassed = timeNow - timeStart
+  return timePassed
+}
 
-  const initFloatTime = () => {
-    SYS.timeStart = COM.queryPerformanceCounter()
-    return 0
-  }
-
-  const floatTime = () => {
-    const timeNow = COM.queryPerformanceCounter()
-    timePassed = timeNow - SYS.timeStart
-    return timePassed
-  }
-
-  root.SYS = {
-    timeStart: 0,
-    initFloatTime,
-    floatTime,
-  }
-
-  root.COM = {
-    queryPerformanceCounter,
-    ms2s,
-  }
-})(window)
+module.exports = {
+  timeStart,
+  initFloatTime,
+  floatTime,
+}
