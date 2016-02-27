@@ -6,26 +6,44 @@ const draw = require("./draw")
 const context = draw.context
 const framebuffer = context.createImageData(640, 480)
 
-// let realTime = 0
-// let oldRealTime = 0
-// let frameTime = 0
-// const targetFramerate = 1/60 * 1000
-//
-// const filterTime = (time) =>
-// {
-//   realTime += time
-//   if (realTime - oldRealTime < targetFramerate)
-//   {
-//     return false
-//   }
-//   frameTime = realTime - oldRealTime
-//   oldRealTime = realTime
-//   return true
-// }
+const PIXEL_SIZE = 4
 
 const init = () =>
 {
   console.log("HOST.init")
+}
+
+const drawRect = (x, y, width, height, red, green, blue, data) =>
+{
+  if (x < 0)
+  {
+    x = 0
+  }
+  if (y < 0)
+  {
+    y = 0
+  }
+  if ((x + width) > framebuffer.width)
+  {
+    width = framebuffer.width - x
+  }
+  if ((y + height) > framebuffer.height)
+  {
+    height = framebuffer.height - y
+  }
+  let pixel = (y * framebuffer.width * PIXEL_SIZE) + (x * PIXEL_SIZE)
+  for (let heightWalker = 0; heightWalker < height; heightWalker++)
+  {
+    for (let widthWalker = 0; widthWalker < width; widthWalker++)
+    {
+      data[pixel + 0] = red
+      data[pixel + 1] = green
+      data[pixel + 2] = blue
+      data[pixel + 3] = 0xFF
+      pixel = pixel + PIXEL_SIZE
+    }
+    pixel = pixel + (framebuffer.width * PIXEL_SIZE) - (width * PIXEL_SIZE)
+  }
 }
 
 const frame = (timestep) =>
@@ -44,6 +62,9 @@ const frame = (timestep) =>
     data[i + 2] = Math.random() * 0xFF
     data[i + 3] = 0xFF
   }
+
+  drawRect(10, 10, 800, 200, 0xFF, 0x00, 0xFF, data)
+
   context.putImageData(framebuffer, 0, 0)
 }
 
