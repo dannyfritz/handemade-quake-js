@@ -1,9 +1,7 @@
 "use strict"
-const config = require("../config.json")
-
 const canvas = document.createElement("canvas")
-canvas.height = config.resolution.height
-canvas.width = config.resolution.width
+canvas.width = 320
+canvas.height = 240
 document.body.appendChild(canvas)
 
 const context = canvas.getContext("2d")

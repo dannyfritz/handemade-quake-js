@@ -92,10 +92,6 @@ const drawPic = (x, y, width, height, lump, dest) =>
 
 const frame = (timestep) =>
 {
-  // if (!filterTime(timestep))
-  // {
-  //   return
-  // }
   // update game
   // render scene
   const data = framebuffer.data
