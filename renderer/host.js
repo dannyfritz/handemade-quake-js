@@ -7,6 +7,10 @@ const context = draw.context
 const framebuffer = context.createImageData(640, 480)
 
 const PIXEL_SIZE = 4
+const PALETTE_SIZE = 3
+const palette = ipcRenderer.sendSync("file:read:palette", "./assets/palette.lmp")
+const finale = ipcRenderer.sendSync("file:read:lmp", "./assets/finale.lmp")
+const pause = ipcRenderer.sendSync("file:read:lmp", "./assets/pause.lmp")
 
 const init = () =>
 {
@@ -46,6 +50,46 @@ const drawRect = (x, y, width, height, red, green, blue, data) =>
   }
 }
 
+const drawPic = (x, y, width, height, lump, dest) =>
+{
+  if (x < 0)
+  {
+    x = 0
+  }
+  if (y < 0)
+  {
+    y = 0
+  }
+  if ((x + width) > framebuffer.width)
+  {
+    width = framebuffer.width - x
+  }
+  if ((y + height) > framebuffer.height)
+  {
+    height = framebuffer.height - y
+  }
+  let location = (y * framebuffer.width * PIXEL_SIZE) + (x * PIXEL_SIZE)
+  let pixel = 0
+  for (let heightWalker = 0; heightWalker < height; heightWalker++)
+  {
+    for (let widthWalker = 0; widthWalker < width; widthWalker++)
+    {
+      const index = lump.data[pixel]
+      const red = palette.data[index * PALETTE_SIZE]
+      const green = palette.data[index * PALETTE_SIZE + 1]
+      const blue = palette.data[index * PALETTE_SIZE + 2]
+      const alpha = 0xFF
+      dest[location + 0] = red
+      dest[location + 1] = green
+      dest[location + 2] = blue
+      dest[location + 3] = alpha
+      pixel = pixel + 1
+      location = location + PIXEL_SIZE
+    }
+    location = location + (framebuffer.width * PIXEL_SIZE) - (width * PIXEL_SIZE)
+  }
+}
+
 const frame = (timestep) =>
 {
   // if (!filterTime(timestep))
@@ -63,7 +107,9 @@ const frame = (timestep) =>
     data[i + 3] = 0xFF
   }
 
-  drawRect(10, 10, 800, 200, 0xFF, 0x00, 0xFF, data)
+  //drawRect(10, 10, 800, 200, 0xFF, 0x00, 0xFF, data)
+  drawPic(10, 10, finale.width, finale.height, finale, data)
+  drawPic(10, 100, pause.width, pause.height, pause, data)
 
   context.putImageData(framebuffer, 0, 0)
 }

@@ -9,7 +9,11 @@ Talk about Handemade Quake [on Reddit](http://bit.ly/1WhdIcW).
 
 ## JavaScript Notes
 
-Using Node.js, Chrome, and Electron
+Using [Electron](http://electron.atom.io/)
+
+## Assets
+
+You need a copy of Quake to copy the assets to `assets\PAK0.PAK` and `assets\PAK1.PAK`
 
 ## Running
 

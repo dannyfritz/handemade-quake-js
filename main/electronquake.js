@@ -1,6 +1,7 @@
 "use strict"
 
 const electron = require("electron")
+const fs = require("fs")
 const pkg = require("../package.json")
 const config = require("../config.json")
 const ipcMain = electron.ipcMain
@@ -15,6 +16,27 @@ const shutdown = () =>
 {
   mainWindow = null
   app.quit()
+}
+
+const readFile = (filename, encoding) =>
+  fs.readFileSync(filename, encoding)
+
+const readPalette = (filename) =>
+{
+  const paletteData = readFile(filename)
+  const palette = {}
+  palette.data = paletteData.toJSON().data
+  return palette
+}
+
+const readLmp = (filename) =>
+{
+  const lmpData = readFile(filename)
+  const lmp = {}
+  lmp.width = lmpData.readUInt16LE(0)
+  lmp.height = lmpData.readUInt16LE(4)
+  lmp.data = lmpData.slice(8).toJSON().data
+  return lmp
 }
 
 app.on("ready", () =>
@@ -36,6 +58,8 @@ app.on("ready", () =>
   }
   mainWindow.on("closed", shutdown)
   ipcMain.on("quit", shutdown)
+  ipcMain.on("file:read:lmp", (event, arg) => event.returnValue = readLmp(arg))
+  ipcMain.on("file:read:palette", (event, arg) => event.returnValue = readPalette(arg))
 })
 
 module.exports = app
