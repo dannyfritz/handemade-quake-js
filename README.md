@@ -5,7 +5,7 @@ I am following along the C centric videos and implementing it in JavaScript.
 
 Please consider donating to [Philip's Patreon](http://bit.ly/1UsXwF5)!
 
-Talk about Handemade Quake [on Reddit](http://bit.ly/1WhdIcW).
+Talk about Handemade Quake [on Reddit](https://www.reddit.com/r/HandmadeQuake/).
 
 ## JavaScript Notes
 
